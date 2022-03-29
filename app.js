@@ -53,7 +53,7 @@ app.get("/api/solar/:lat/:lng", async (req, res) => {
 
 // Lunar API
 
-app.get("/api/lunar/:lat/:lng/:year/:month/:data", async (req, res) => {
+app.get("/api/lunar/:lat/:lng/:year/:month/:date", async (req, res) => {
   try {
 
     const response = await axios(

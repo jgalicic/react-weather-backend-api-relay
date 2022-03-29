@@ -96,8 +96,7 @@ app.get("/api/aqi/:lat/:lng", async (req, res) => {
       success: true,
       status: results.status,
       statusText: results.statusText,
-      coords: results.data.coord,
-      data: results.data.list
+      data: results.data
     })
 
   } catch (err) {

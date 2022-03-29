@@ -55,10 +55,9 @@ app.get("/api/solar/:lat/:lng", async (req, res) => {
 
 app.get("/api/lunar/:lat/:lng/:year/:month/:date", async (req, res) => {
   try {
-
     const response = await axios(
       `https://api.weatherapi.com/v1/astronomy.json?key=
-      ${process.env.OPEN_WEATHER_MAP_KEY}&q=
+      ${process.env.WEATHER_API_KEY}&q=
       ${req.params.lat},
       ${req.params.lng}&dt=
       ${req.params.year}-
@@ -80,6 +79,89 @@ app.get("/api/lunar/:lat/:lng/:year/:month/:date", async (req, res) => {
       message: err.message,
     });
   }
+})
+
+// AQI API
+
+app.get("/api/aqi/:lat/:lng", async (req, res) => {
+
+  try {
+    const response = await axios(
+      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${req.params.lat}&lon=${req.params.lng}&appid=${process.env.OPEN_WEATHER_MAP_ID}`
+    )
+
+    const results = await response
+
+    return res.json({
+      success: true,
+      status: results.status,
+      statusText: results.statusText,
+      coords: results.data.coord,
+      data: results.data.list
+    })
+
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+})
+
+
+// Weather API
+
+app.get("/api/weather/:lat/:lng", async (req, res) => {
+
+  try {
+    const response = await axios(
+      `https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${req.params.lat},${req.params.lng}&days=7&aqi=yes&alerts=yes`
+    )
+
+    const results = await response
+
+    return res.json({
+      success: true,
+      status: results.status,
+      statusText: results.statusText,
+      data: results.data
+    })
+
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+})
+
+// Pollen API
+
+app.get("/api/pollen/:lat/:lng", async (req, res) => {
+
+  let options = {
+    method: 'GET',
+    url: 'https://air-quality.p.rapidapi.com/current/airquality',
+    params: {lat: req.params.lat, lon: req.params.lng},
+    headers: {
+      'X-RapidAPI-Host': 'air-quality.p.rapidapi.com',
+      'X-RapidAPI-Key': process.env.RAPID_API_KEY
+    }
+  };
+  
+  axios.request(options).then(function (results) {
+        return res.json({
+          success: true,
+          status: results.status,
+          statusText: results.statusText,
+          data: results.data
+        })
+  }).catch(function (err) {
+    return res.status(500).json({
+            success: false,
+            message: err.message,
+          });
+  });
 })
 
 

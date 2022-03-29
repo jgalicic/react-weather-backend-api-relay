@@ -83,4 +83,4 @@ app.get("/api/lunar/:lat/:lng/:year/:month/:data", async (req, res) => {
 })
 
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.listen(process.env.PORT || port, () => console.log(`Listening on port ${port}!`));

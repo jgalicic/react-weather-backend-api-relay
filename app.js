@@ -4,7 +4,7 @@ const express = require("express");
 const axios = require("axios")
 const convert = require("xml-js");
 const rateLimit = require("express-rate-limit");
-var cors = require("cors");
+const cors = require("cors");
 const app = express();
 const port = 3000;
 
@@ -20,6 +20,15 @@ app.use(limiter);
 
 // Allow CORS from any origin
 app.use(cors());
+
+var allowCrossDomain = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+};
+
+app.use(allowCrossDomain);
 
 // ROUTES
 

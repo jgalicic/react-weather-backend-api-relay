@@ -18,25 +18,18 @@ const limiter = rateLimit({
 //  apply to all requests
 app.use(limiter);
 
-// Allow CORS from any origin
-app.use(cors());
-
-var allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-};
-
-app.use(allowCrossDomain);
+var corsOptions = {
+  origin: 'https://react-weather-jgalicic.herokuapp.com/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 // ROUTES
 
 // Home
-app.get("/", (req, res) => res.send("Welcome to Justin's React Weather Backend API Relay!"));
+app.get("/", cors(corsOptions), (req, res) => res.send("Welcome to Justin's React Weather Backend API Relay!"));
 
 // Solar API
-app.get("/api/solar/:lat/:lng", async (req, res) => {
+app.get("/api/solar/:lat/:lng", cors(corsOptions), async (req, res) => {
 
   try {
 
@@ -62,7 +55,7 @@ app.get("/api/solar/:lat/:lng", async (req, res) => {
 
 // Lunar API
 
-app.get("/api/lunar/:lat/:lng/:year/:month/:date", async (req, res) => {
+app.get("/api/lunar/:lat/:lng/:year/:month/:date", cors(corsOptions), async (req, res) => {
   try {
     const response = await axios(
       `https://api.weatherapi.com/v1/astronomy.json?key=
@@ -92,7 +85,7 @@ app.get("/api/lunar/:lat/:lng/:year/:month/:date", async (req, res) => {
 
 // AQI API
 
-app.get("/api/aqi/:lat/:lng", async (req, res) => {
+app.get("/api/aqi/:lat/:lng", cors(corsOptions), async (req, res) => {
 
   try {
     const response = await axios(
@@ -119,7 +112,7 @@ app.get("/api/aqi/:lat/:lng", async (req, res) => {
 
 // Weather API
 
-app.get("/api/weather/:lat/:lng", async (req, res) => {
+app.get("/api/weather/:lat/:lng", cors(corsOptions), async (req, res) => {
 
   try {
     const response = await axios(
@@ -145,7 +138,7 @@ app.get("/api/weather/:lat/:lng", async (req, res) => {
 
 // Pollen API
 
-app.get("/api/pollen/:lat/:lng", async (req, res) => {
+app.get("/api/pollen/:lat/:lng", cors(corsOptions), async (req, res) => {
 
   let options = {
     method: 'GET',

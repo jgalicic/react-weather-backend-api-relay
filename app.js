@@ -24,8 +24,12 @@ app.use(function (req, res, next) {
   next()
 })
 
+// app.use(cors({
+//   origin: "https://react-weather-backend-relay.herokuapp.com/"
+// }))
+
 app.use(cors({
-  origin: "https://react-weather-backend-relay.herokuapp.com/"
+  origin: "*"
 }))
 
 // ROUTES

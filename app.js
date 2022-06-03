@@ -18,7 +18,13 @@ const limiter = rateLimit({
 //  apply to all requests
 app.use(limiter);
 
-app.use(cors())
+// app.use(cors({
+//   origin: "https://react-weather-jgalicic.herokuapp.com/"
+// }))
+
+app.use(cors({
+  origin: "*"
+}))
 
 // ROUTES
 

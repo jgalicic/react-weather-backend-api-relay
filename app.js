@@ -24,9 +24,26 @@ app.use(cors())
 
 // Home
 app.get("/", (req, res) => res.send(`
-<h2>Welcome to Justin's React Weather Backend API Relay!</h2>
-<p>Endpoint Examples:</p>
-<p><a href="/api/solar/47.5/-122.3"></a></p>
+
+<h1 style="font-family:sans-serif">Welcome to Justin's React Weather Backend API Relay!</h1>
+
+<h2 style="font-family:sans-serif">Endpoint Examples:</h2>
+<hr />
+<h3 style="font-family:sans-serif">Solar</h3>
+<p><a href="/api/solar/47.61/-122.33">/api/solar/47.61/-122.33</a></p>
+<hr />
+<h3 style="font-family:sans-serif">Lunar</h3>
+<p><a href="/api/lunar/47.61/-122.33/2022/06/01">/api/lunar/47.61/-122.33/2022/06/01</a></p>
+<hr />
+<h3 style="font-family:sans-serif">AQI</h3>
+<p><a href="/api/aqi/47.61/-122.33">/api/aqi/47.61/-122.33</a></p>
+<hr />
+<h3 style="font-family:sans-serif">Weather</h3>
+<p><a href="/api/weather/47.61/-122.33">/api/weather/47.61/-122.33</a></p>
+<hr />
+<h3 style="font-family:sans-serif">Pollen</h3>
+<p><a href="/api/pollen/47.61/-122.33">/api/pollen/47.61/-122.33</a></p>
+
 `));
 
 // Solar API

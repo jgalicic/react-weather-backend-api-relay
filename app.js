@@ -23,7 +23,11 @@ app.use(cors())
 // ROUTES
 
 // Home
-app.get("/", (req, res) => res.send("Welcome to Justin's React Weather Backend API Relay!"));
+app.get("/", (req, res) => res.send(`
+<h2>Welcome to Justin's React Weather Backend API Relay!</h2>
+<p>Endpoint Examples:</p>
+<p><a href="/api/solar/47.5/-122.3"></a></p>
+`));
 
 // Solar API
 app.get("/api/solar/:lat/:lng", async (req, res) => {

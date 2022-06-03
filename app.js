@@ -23,7 +23,7 @@ app.use(limiter);
 // }))
 
 app.use(cors({
-  origin: "*"
+  origin: "https://react-weather-backend-relay.herokuapp.com/"
 }))
 
 // ROUTES
@@ -73,6 +73,7 @@ app.get("/api/solar/:lat/:lng", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: err.message,
+      error: err
     });
   }
 });
@@ -103,6 +104,7 @@ app.get("/api/lunar/:lat/:lng/:year/:month/:date", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: err.message,
+      error: err
     });
   }
 })
@@ -129,6 +131,7 @@ app.get("/api/aqi/:lat/:lng", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: err.message,
+      error: err
     });
   }
 })
@@ -156,6 +159,7 @@ app.get("/api/weather/:lat/:lng", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: err.message,
+      error: err
     });
   }
 })
@@ -185,6 +189,7 @@ app.get("/api/pollen/:lat/:lng", async (req, res) => {
     return res.status(500).json({
             success: false,
             message: err.message,
+            error: err
           });
   });
 })

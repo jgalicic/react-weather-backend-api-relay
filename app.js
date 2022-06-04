@@ -18,15 +18,14 @@ const limiter = rateLimit({
 //  apply to all requests
 app.use(limiter);
 
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200
-}
+app.use(cors({
+  origin: "*"
+}))
 
 // ROUTES
 
 // Home
-app.get("/", cors(corsOptions), (req, res) => res.send(`
+app.get("/", (req, res) => res.send(`
 
 <h1 style="font-family:sans-serif">Welcome to Justin's React Weather Backend API Relay!</h1>
 

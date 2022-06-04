@@ -19,7 +19,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.use(cors({
-  origin: "https://react-weather-jgalicic.herokuapp.com",
+  origin: "*",
   methods: ["GET"]
 }))
 

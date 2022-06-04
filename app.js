@@ -18,15 +18,15 @@ const limiter = rateLimit({
 //  apply to all requests
 app.use(limiter);
 
-app.use(cors({
-  origin: "*",
-  methods: ["GET"]
-}))
+var corsOptions = {
+  origin: ['https://react-weather-jgalicic.herokuapp.com/','*'],
+  optionsSuccessStatus: 200
+}
 
 // ROUTES
 
 // Home
-app.get("/", (req, res) => res.send(`
+app.get("/", cors(corsOptions), (req, res) => res.send(`
 
 <h1 style="font-family:sans-serif">Welcome to Justin's React Weather Backend API Relay!</h1>
 

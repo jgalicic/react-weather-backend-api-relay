@@ -108,7 +108,6 @@ app.get("/api/lunar/:lat/:lng/:year/:month/:date", async (req, res) => {
 // AQI API
 
 app.get("/api/aqi/:lat/:lng/:year/:month/:date/:distanceinmiles", async (req, res) => {
-  console.log(`https://www.airnowapi.org/aq/forecast/latLong/?format=application/json&latitude=${req.params.lat}&longitude=${req.params.lng}&date=${req.params.year}-${req.params.month}-${req.params.date}&distance=${req.params.distanceinmiles}&API_KEY=${process.env.AIR_NOW_API_KEY}`)
 
   try {
     const response = await axios(
@@ -125,7 +124,6 @@ app.get("/api/aqi/:lat/:lng/:year/:month/:date/:distanceinmiles", async (req, re
     })
 
   } catch (err) {
-    console.log("Oopsy!")
     return res.status(500).json({
       success: false,
       message: err.message,

@@ -107,11 +107,16 @@ app.get("/api/lunar/:lat/:lng/:year/:month/:date", async (req, res) => {
 
 // AQI API
 
-app.get("/api/aqi/:lat/:lng", async (req, res) => {
+app.get("/api/aqi/:lat/:lng/:year/:month/:date/:distance", async (req, res) => {
 
   try {
     const response = await axios(
-      `https://api.openweathermap.org/data/2.5/air_pollution?lat=${req.params.lat}&lon=${req.params.lng}&appid=${process.env.OPEN_WEATHER_MAP_ID}`
+      `https://www.airnowapi.org/aq/forecast/latLong/?format=application/json&
+      latitude=${req.params.lat}&
+      longitude=${req.params.lng}&
+      date=${req.params.year}-${req.params.month}-${req.params.date}&
+      distance=${req.params.distanceinmiles}&
+      API_KEY=${process.env.AIR_NOW_API_KEY}`
     )
 
     const results = await response

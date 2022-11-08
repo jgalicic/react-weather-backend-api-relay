@@ -35,10 +35,10 @@ app.get("/", (req, res) => res.send(`
 <p><a href="/api/solar/47.61/-122.33">/api/solar/47.61/-122.33</a></p>
 <hr />
 <h3 style="font-family:sans-serif">Lunar</h3>
-<p><a href="/api/lunar/47.61/-122.33/2022/06/01">/api/lunar/47.61/-122.33/2022/06/01</a></p>
+<p><a href="/api/lunar/47.61/-122.33/2022/06/01">/api/lunar/47.61/-122.33/2022/11/08</a></p>
 <hr />
 <h3 style="font-family:sans-serif">AQI</h3>
-<p><a href="/api/aqi/47.61/-122.33">/api/aqi/47.61/-122.33</a></p>
+<p><a href="/api/aqi/47.61/-122.33">/api/aqi/47.61/-122.33/2022/11/08/25</a></p>
 <hr />
 <h3 style="font-family:sans-serif">Weather</h3>
 <p><a href="/api/weather/47.61/-122.33">/api/weather/47.61/-122.33</a></p>

@@ -2,6 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const axios = require("axios")
+const fetch = require("fetch")
 const convert = require("xml-js");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
@@ -164,30 +165,57 @@ app.get("/api/weather/:lat/:lng", async (req, res) => {
 
 app.get("/api/pollen/:lat/:lng", async (req, res) => {
 
-  let options = {
-    method: 'GET',
-    url: 'https://air-quality.p.rapidapi.com/current/airquality',
-    params: {lat: req.params.lat, lon: req.params.lng},
-    headers: {
-      'X-RapidAPI-Host': 'air-quality.p.rapidapi.com',
-      'X-RapidAPI-Key': process.env.RAPID_API_KEY
-    }
-  };
+const options = {
+  method: 'GET',
+  url: 'https://api.ambeedata.com/latest/pollen/by-lat-lng',
+  params: {lat: req.params.lat, lng: req.params.lng},
+  headers: {'x-api-key': '9f4f4998fc77f23f6d1ef788b16e9f7700cd61227665dca536e85663b28db560', 'Content-type': 'application/json'}
+}
+
+try {
+  await axios.request(options).then(results => {
+    return res.json({
+      success: true,
+      status: results.status,
+      statusText: results.statusText,
+      data: results.data
+    })
+  })
+
+} catch (err) {
+  return (res.status(500).json({
+    success: false,
+    message: err.message,
+    error: err
+  }))
+}
+
+  // RapidAPI Air Quality API (Depricated)
+
+  // let options = {
+  //   method: 'GET',
+  //   url: 'https://air-quality.p.rapidapi.com/current/airquality',
+  //   params: {lat: req.params.lat, lon: req.params.lng},
+  //   headers: {
+  //     'X-RapidAPI-Host': 'air-quality.p.rapidapi.com',
+  //     'X-RapidAPI-Key': process.env.RAPID_API_KEY
+  //   }
+  // };
   
-  axios.request(options).then(function (results) {
-        return res.json({
-          success: true,
-          status: results.status,
-          statusText: results.statusText,
-          data: results.data
-        })
-  }).catch(function (err) {
-    return res.status(500).json({
-            success: false,
-            message: err.message,
-            error: err
-          });
-  });
+  // axios.request(options).then(function (results) {
+  //       return res.json({
+  //         success: true,
+  //         status: results.status,
+  //         statusText: results.statusText,
+  //         data: results.data
+  //       })
+  // }).catch(function (err) {
+  //   return res.status(500).json({
+  //           success: false,
+  //           message: err.message,
+  //           error: err
+  //         });
+  // });
 })
 
 
